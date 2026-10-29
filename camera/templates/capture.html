@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1769E0">
+<title>MediGuard AI · Phone camera</title>
+<style>
+:root{--blue:#1769E0;--navy:#142B4F;--soft:#F5F9FF;--line:#E1EAF7;--green:#2FA36B;--red:#D64545;--slate:#5A6E8C}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--navy);background:#fff;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{display:flex;align-items:center;gap:10px;padding:18px 20px;border-bottom:1px solid var(--line)}
+header svg{width:34px;height:34px} header b{font-size:17px;display:block} header small{color:var(--slate);font-size:12px}
+main{padding:20px;max-width:520px;margin:0 auto}
+h1{font-size:22px;margin:4px 0 6px} p{color:var(--slate);line-height:1.5;margin:0 0 16px}
+.shot{position:relative;border:2px dashed #C6D8F5;background:var(--soft);border-radius:20px;min-height:260px;display:grid;place-items:center;overflow:hidden}
+.shot img{width:100%;display:block} .shot .hint{text-align:center;color:var(--slate);padding:24px}
+.btn{display:block;width:100%;padding:16px;border-radius:14px;font-size:17px;font-weight:600;border:0;margin-top:12px;font-family:inherit}
+.primary{background:var(--blue);color:#fff;box-shadow:0 8px 18px rgba(23,105,224,.28)} .primary:disabled{opacity:.45;box-shadow:none}
+.ghost{background:var(--soft);color:var(--navy);border:1px solid var(--line)}
+input[type=file]{position:absolute;width:1px;height:1px;opacity:0}
+.msg{margin-top:14px;padding:12px 14px;border-radius:12px;font-size:15px;display:none}
+.msg.ok{display:block;background:#E9F7EF;color:#1D7A4D} .msg.err{display:block;background:#FDECEC;color:#A12F2F}
+.tips{font-size:13px;color:var(--slate);margin-top:20px;padding-left:18px} .tips li{margin:4px 0}
+</style>
+</head>
+<body>
+<header>
+  <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4 9 12.5v17.2C9 45 18.8 55.6 32 60c13.2-4.4 23-15 23-30.3V12.5L32 4Z" fill="#1769E0"/><rect x="27" y="18" width="10" height="28" rx="2.5" fill="#fff"/><rect x="18" y="27" width="28" height="10" rx="2.5" fill="#fff"/></svg>
+  <div><b>MediGuard AI</b><small>Phone camera link</small></div>
+</header>
+<main>
+{% if error %}
+  <h1>Can’t connect</h1>
+  <p>{{ error }}</p>
+{% else %}
+  <h1>Photograph the medicine pack</h1>
+  <p>Fill the frame with the label. Make sure the batch number, expiry date and MRP are sharp and free of glare.</p>
+  <label class="shot" for="photo" id="shot"><div class="hint">Tap to open the camera</div></label>
+  <input id="photo" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
+  <button class="btn ghost" id="retake" type="button" onclick="document.getElementById('photo').click()">Open camera</button>
+  <button class="btn primary" id="send" type="button" disabled>Send to MediGuard AI</button>
+  <div class="msg" id="msg" role="status" aria-live="polite"></div>
+  <ul class="tips">
+    <li>Use daylight or a bright lamp; avoid flash reflections on foil.</li>
+    <li>Photos up to {{ max_mb }} MB in JPG, PNG or WEBP.</li>
+    <li>Keep this page open to send more photos. The link expires automatically.</li>
+  </ul>
+{% endif %}
+</main>
+{% if not error %}
+<script>
+const token = {{ token|tojson }};
+const input = document.getElementById('photo'), send = document.getElementById('send'),
+      shot = document.getElementById('shot'), msg = document.getElementById('msg'), retake = document.getElementById('retake');
+let file = null;
+function show(text, ok){ msg.textContent = text; msg.className = 'msg ' + (ok ? 'ok' : 'err'); }
+input.addEventListener('change', () => {
+  file = input.files[0] || null; msg.className = 'msg';
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  shot.innerHTML = '<img alt="Captured medicine photo" src="' + url + '">';
+  send.disabled = false; retake.textContent = 'Retake photo';
+});
+send.addEventListener('click', async () => {
+  if (!file) return;
+  send.disabled = true; send.textContent = 'Sending…';
+  const fd = new FormData(); fd.append('photo', file, file.name || 'photo.jpg');
+  try {
+    const r = await fetch('/upload?token=' + encodeURIComponent(token), { method: 'POST', body: fd });
+    const j = await r.json().catch(() => ({ ok: false, error: 'Unexpected server response (' + r.status + ').' }));
+    if (j.ok) { show('Sent. Check the laptop — the photo is ready for analysis.', true); send.textContent = 'Sent'; }
+    else { show(j.error || 'Upload failed.', false); send.disabled = false; send.textContent = 'Send to MediGuard AI'; }
+  } catch (e) {
+    show('Could not reach the laptop. Check both devices are on the same Wi-Fi and the camera server is running.', false);
+    send.disabled = false; send.textContent = 'Send to MediGuard AI';
+  }
+});
+</script>
+{% endif %}
+</body>
+</html>

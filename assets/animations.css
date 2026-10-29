@@ -1,0 +1,39 @@
+/* Purposeful motion only: the analysis scan, result reveal and button feedback. */
+.mg-scan { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid var(--mg-line);
+  background: #0B1A33; max-height: 380px; display: flex; justify-content: center; }
+.mg-scan img { max-width: 100%; max-height: 380px; object-fit: contain; opacity: .9; display: block; }
+.mg-scan .line { position: absolute; left: 0; right: 0; height: 3px; top: 0;
+  background: linear-gradient(90deg, transparent, #59A3FF 20%, #ffffff 50%, #59A3FF 80%, transparent);
+  box-shadow: 0 0 18px 6px rgba(23,105,224,.55); animation: mg-scan 1.8s ease-in-out infinite alternate; }
+.mg-scan .grid { position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(89,163,255,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(89,163,255,.12) 1px, transparent 1px);
+  background-size: 28px 28px; }
+.mg-scan .corner { position: absolute; width: 26px; height: 26px; border: 3px solid #59A3FF; }
+.mg-scan .c1 { top: 10px; left: 10px; border-right: 0; border-bottom: 0; border-radius: 8px 0 0 0; }
+.mg-scan .c2 { top: 10px; right: 10px; border-left: 0; border-bottom: 0; border-radius: 0 8px 0 0; }
+.mg-scan .c3 { bottom: 10px; left: 10px; border-right: 0; border-top: 0; border-radius: 0 0 0 8px; }
+.mg-scan .c4 { bottom: 10px; right: 10px; border-left: 0; border-top: 0; border-radius: 0 0 8px 0; }
+@keyframes mg-scan { from { top: 4%; } to { top: 94%; } }
+
+.mg-stages { list-style: none; padding: 0; margin: 14px 0 0; }
+.mg-stages li { display: flex; align-items: center; gap: 10px; padding: 7px 0; color: var(--mg-slate); font-size: .93rem; }
+.mg-stages li .ic { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--mg-line); flex: none; display: grid; place-items: center; font-size: 12px; }
+.mg-stages li.done { color: var(--mg-navy); } .mg-stages li.done .ic { background: var(--mg-green); border-color: var(--mg-green); color: #fff; }
+.mg-stages li.active { color: var(--mg-blue); font-weight: 600; }
+.mg-stages li.active .ic { border-color: var(--mg-blue); border-top-color: transparent; animation: mg-spin .8s linear infinite; }
+.mg-stages li.skipped { color: #8A9BB5; } .mg-stages li.skipped .ic { border-style: dashed; }
+.mg-stages li.failed { color: var(--mg-red); } .mg-stages li.failed .ic { background: var(--mg-red); border-color: var(--mg-red); color: #fff; }
+@keyframes mg-spin { to { transform: rotate(360deg); } }
+
+.mg-reveal { animation: mg-reveal .5s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes mg-reveal { from { opacity: 0; transform: translateY(10px) scale(.99); } to { opacity: 1; transform: none; } }
+.mg-prob .fill { animation: mg-grow .9s cubic-bezier(.2,.7,.2,1) both; transform-origin: left; }
+@keyframes mg-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.mg-pulse { animation: mg-pulse 1.6s ease-in-out infinite; }
+@keyframes mg-pulse { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mg-scan .line { animation: none; top: 50%; }
+  .mg-reveal, .mg-prob .fill, .mg-pulse, .mg-stages li.active .ic { animation: none !important; }
+}

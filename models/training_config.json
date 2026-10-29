@@ -1,0 +1,38 @@
+{
+  "model_version": "20261024-2133",
+  "trained_at": "2026-10-24T21:33:40",
+  "architecture": "MobileNetV2 + GAP + Dropout(0.3) + Dense(softmax)",
+  "base_weights": "imagenet",
+  "image_size": [
+    224,
+    224
+  ],
+  "classes": [
+    "Fake",
+    "Real"
+  ],
+  "class_counts": {
+    "Fake": 168,
+    "Real": 284
+  },
+  "invalid_images": 0,
+  "epochs_requested": 10,
+  "fine_tune_epochs": 3,
+  "fine_tune_layers": 30,
+  "epochs_run": 12,
+  "batch_size": 8,
+  "learning_rate": 0.001,
+  "seed": 42,
+  "val_split": 0.15,
+  "test_split": 0.15,
+  "class_weights_used": true,
+  "augmentation": [
+    "RandomFlip(horizontal)",
+    "RandomRotation(0.06)",
+    "RandomZoom(0.12)",
+    "RandomContrast(0.15)",
+    "RandomTranslation(0.06)"
+  ],
+  "tensorflow_version": "2.16.2",
+  "data_dir": "/Users/ayushakare/Downloads/dataset_clean"
+}

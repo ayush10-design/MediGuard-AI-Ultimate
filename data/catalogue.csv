@@ -1,0 +1,44 @@
+medicine,manufacturer,composition,strength,form
+Dolo 650,Micro Labs,Paracetamol,650 mg,Tablet
+Calpol 500,GSK,Paracetamol,500 mg,Tablet
+Combiflam,Sanofi,Ibuprofen + Paracetamol,400 mg + 325 mg,Tablet
+Pan 40,Alkem Laboratories,Pantoprazole,40 mg,Tablet
+Pantocid 40,Sun Pharma,Pantoprazole,40 mg,Tablet
+Omez 20,Dr. Reddy's Laboratories,Omeprazole,20 mg,Capsule
+Razo 20,Dr. Reddy's Laboratories,Rabeprazole,20 mg,Tablet
+Azithral 500,Alembic Pharmaceuticals,Azithromycin,500 mg,Tablet
+Augmentin 625 Duo,GSK,Amoxicillin + Clavulanic Acid,500 mg + 125 mg,Tablet
+Moxikind-CV 625,Mankind Pharma,Amoxicillin + Clavulanic Acid,500 mg + 125 mg,Tablet
+Ciplox 500,Cipla,Ciprofloxacin,500 mg,Tablet
+Allegra 120,Sanofi,Fexofenadine,120 mg,Tablet
+Montair LC,Cipla,Montelukast + Levocetirizine,10 mg + 5 mg,Tablet
+Okacet,Cipla,Cetirizine,10 mg,Tablet
+Asthalin Inhaler,Cipla,Salbutamol,100 mcg/dose,Inhaler
+Cheston Cold,Cipla,Cetirizine + Paracetamol + Phenylephrine,5 mg + 325 mg + 10 mg,Tablet
+Telma 40,Glenmark Pharmaceuticals,Telmisartan,40 mg,Tablet
+Amlokind 5,Mankind Pharma,Amlodipine,5 mg,Tablet
+Glycomet 500,USV,Metformin,500 mg,Tablet
+Ecosprin 75,USV,Aspirin,75 mg,Tablet
+Rosuvas 10,Sun Pharma,Rosuvastatin,10 mg,Tablet
+Thyronorm 50,Abbott India,Thyroxine,50 mcg,Tablet
+Shelcal 500,Torrent Pharmaceuticals,Calcium + Vitamin D3,500 mg + 250 IU,Tablet
+Zerodol-SP,Ipca Laboratories,Aceclofenac + Paracetamol + Serratiopeptidase,100 mg + 325 mg + 15 mg,Tablet
+Meftal-Spas,Blue Cross Laboratories,Mefenamic Acid + Dicyclomine,250 mg + 10 mg,Tablet
+Becosules,Pfizer,Vitamin B Complex + Vitamin C,Multivitamin,Capsule
+Gelusil MPS,Pfizer,Aluminium Hydroxide + Magnesium Hydroxide + Simethicone,Antacid,Liquid
+Digene,Abbott India,Magnesium Hydroxide + Aluminium Hydroxide + Simethicone,Antacid,Tablet
+Limcee,Abbott India,Vitamin C,500 mg,Chewable Tablet
+Zincovit,Apex Laboratories,Multivitamin + Zinc,Multivitamin,Tablet
+Saridon,Bayer,Paracetamol + Propyphenazone + Caffeine,250 mg + 150 mg + 50 mg,Tablet
+Liv 52,Himalaya Wellness,Herbal formulation,Herbal,Tablet
+Manforce 50,Mankind Pharma,Sildenafil,50 mg,Tablet
+Unwanted 72,Mankind Pharma,Levonorgestrel,1.5 mg,Tablet
+Nurokind-OD,Mankind Pharma,Methylcobalamin,1500 mcg,Tablet
+Gemer 1,Sun Pharma,Glimepiride + Metformin,1 mg + 500 mg,Tablet
+Lupi-D3,Lupin,Cholecalciferol,60000 IU,Capsule
+Ajaduo 25,Lupin,Empagliflozin + Linagliptin,25 mg + 5 mg,Tablet
+Deriphyllin Retard 150,Zydus Lifesciences,Etofylline + Theophylline,115 mg + 35 mg,Tablet
+Atorva 10,Zydus Lifesciences,Atorvastatin,10 mg,Tablet
+Ascoril LS,Glenmark Pharmaceuticals,Ambroxol + Levosalbutamol + Guaiphenesin,Syrup,Syrup
+Contiflo OD 0.4,Sun Pharma,Tamsulosin,0.4 mg,Capsule
+Ultracet,Janssen,Tramadol + Paracetamol,37.5 mg + 325 mg,Tablet
